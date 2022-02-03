@@ -1,7 +1,7 @@
 {
 	"name": "datarex",
 	"description": "Easy to use better-sqlite3 wrapper with tons of features",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"author": {
 		"name": "Nigelrex"
 	},

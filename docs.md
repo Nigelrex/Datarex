@@ -72,7 +72,7 @@ You need to set the value of the key as a number before adding it.
 ```js
 // Import db from databaseSchema.js
 db.set("key", 46);
-db.add("key", 20); // adds 46 + 22 and stores it as 66
+db.add("key", 20); // adds 46 + 20 and stores it as 66
 ```
 
 ### All

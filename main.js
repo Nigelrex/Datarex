@@ -5,17 +5,19 @@ const moment = require("moment");
 
 module.exports = class DatabaseManager extends Map {
   /**
-   * @param {boolean} options.inMemory
-   * @param {boolean} options.path
-   * @param {string} options.tableName
-   * @param {Object} options.settings
-   * @param {Object} options.db
+   * @param {boolean} options.path path to database
+   * @param {string} options.tableName Your tablename
+   * @param {Object} options.settings Settings
+   * @param {boolean} options.settings.inMemory Set to true to use cache
+   * @param {boolean} options.settings.clearCache Set to true to clear cache in intervals
+   * @param {Object} options.Intervals Intervals
+   * @param {boolean} options.Intervals.clearCacheInterval Set the interval to clear cache
+   * @param {boolean} options.Intervals.expireInterval Set the interval to expire a key
    *
    */
   constructor(options = {}) {
     super();
     this.path = options.path ?? "./Databases/json.sqlite";
-    this.db = new Database(this.path);
     this.tableName = options.tableName ?? "json";
     this.Intervals = options.Intervals ?? {
       expiryInterval: 1000,
@@ -25,11 +27,20 @@ module.exports = class DatabaseManager extends Map {
     this.settings.clearCache = this.settings.clearCache ?? true;
     this.settings.inMemory = this.settings.inMemory ?? true;
     fs.ensureDir(this.path.split(/\w+\.\w+/g.exec(this.path).pop())[0]);
+
+    this.db = new Database(this.path);
     setInterval(async () => {
-      this.all().forEach((element) => {
-        if (element.VALUE.expiry <= moment().unix()) this.delete(element.KEY);
-      });
+      try {
+        this.all().forEach((element) => {
+          if (element.VALUE.expiry <= moment().unix()) this.delete(element.KEY);
+        });
+      } catch (error) {}
     }, this.Intervals.expiryInterval);
+    setInterval(() => {
+      try {
+        if (this.settings.inMemory) super.clear();
+      } catch (error) {}
+    }, this.Intervals.clearCacheInterval);
   }
 
   /**
