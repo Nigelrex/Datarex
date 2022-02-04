@@ -1,6 +1,6 @@
 # Daterex
 
-![Datarex](./logo.png)
+![](./LOGO-1.png)
 
 ## What is Datarex?
 

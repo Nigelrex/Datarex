@@ -4,8 +4,7 @@ databases/
 *.sqlite
 *.db
 retype.yml
-favicon.png
-logo.png
+*.png
 .env
 test.js
 node_modules/
