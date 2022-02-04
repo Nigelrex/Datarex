@@ -12,6 +12,12 @@ With the power of Javascript Map and the persistant storage of your data, you ca
 
 Datarex is much better than other better-sqlite3 wrappers, because it has a Map-like interface, which makes it easy to use. And can be turned off anytime per table. This helps you save on Memory when it runs low and turn it back on for much faster database access.
 
+### Support
+
+Join my discord for help and support.
+
+[Nigelrex's Server](https://discord.gg/ATrvrZtSqZ)
+
 ### Docs
 
 Check out the [Docs](https://nigelrex.github.io/Datarex)

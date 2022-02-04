@@ -3,32 +3,51 @@ const Database = require("better-sqlite3");
 const _ = require("lodash");
 const moment = require("moment");
 
-module.exports = class DatabaseManager extends Map {
+module.exports = class Datarex extends Map {
   /**
-   * @param {boolean} options.path path to database
-   * @param {string} options.tableName Your tablename
+   * @param {String} options.path path to database
+   * @param {String} options.tableName Your tablename
    * @param {Object} options.settings Settings
-   * @param {boolean} options.settings.inMemory Set to true to use cache
-   * @param {boolean} options.settings.clearCache Set to true to clear cache in intervals
+   * @param {Boolean} options.settings.inMemory Set to true to use cache
+   * @param {Boolean} options.settings.clearCache Set to true to clear cache in intervals
+   * @param {Boolean} options.settings.loadKeys Set to true to load keys on startup
    * @param {Object} options.Intervals Intervals
-   * @param {boolean} options.Intervals.clearCacheInterval Set the interval to clear cache
-   * @param {boolean} options.Intervals.expireInterval Set the interval to expire a key
+   * @param {Boolean} options.Intervals.clearCacheInterval Set the interval to clear cache
+   * @param {Boolean} options.Intervals.expireInterval Set the interval to expire a key
    *
    */
   constructor(options = {}) {
     super();
-    this.path = options.path ?? "./Databases/json.sqlite";
-    this.tableName = options.tableName ?? "json";
-    this.Intervals = options.Intervals ?? {
-      expiryInterval: 1000,
-      clearCacheInterval: 300000,
+    // Options
+    const defaultOptions = {
+      path: "./Databases/index.sqlite",
+      tableName: "json",
+      Intervals: {
+        expiryInterval: 1000, // defaults to 1000
+        clearCacheInterval: 300000, // defaults to 300000
+      },
+      settings: {
+        inMemory: true, //defaults to true
+        clearCache: true, //defaults to true
+        loadKeys: true, //defaults to true
+      },
     };
-    this.settings = options.settings ?? { clearCache: true, inMemory: true };
-    this.settings.clearCache = this.settings.clearCache ?? true;
-    this.settings.inMemory = this.settings.inMemory ?? true;
+    options = _.defaultsDeep(options, defaultOptions);
+    this.path = options.path;
+    this.tableName = options.tableName;
+    this.settings = options.settings;
+    this.Intervals = options.Intervals;
+    // Ensure dir
     fs.ensureDir(this.path.split(/\w+\.\w+/g.exec(this.path).pop())[0]);
-
     this.db = new Database(this.path);
+
+    if (this.settings.loadKeys) {
+      try {
+        this.all().forEach((element) => {
+          this.set(element.KEY, element.VALUE);
+        });
+      } catch (error) {}
+    }
     setInterval(async () => {
       try {
         this.all().forEach((element) => {
@@ -153,7 +172,7 @@ module.exports = class DatabaseManager extends Map {
   get(key) {
     this._ctine();
     if (typeof key === "number") key = key.toString();
-    if (this.settings.inMemory) return super.get(key);
+    if (this.settings.inMemory) return JSON.parse(super.get(key));
     let target;
     let output;
     if (key && key.includes(".")) {
@@ -245,7 +264,6 @@ module.exports = class DatabaseManager extends Map {
   set(key, value) {
     this._ctine();
     if (typeof key === "number") key = key.toString();
-    if (this.settings.inMemory) super.set(key, value);
     let target;
     if (key && key.includes(".")) {
       let unparsed = key.split(".");
@@ -275,6 +293,8 @@ module.exports = class DatabaseManager extends Map {
         `UPDATE ${this.tableName} SET KEY = (?), VALUE = (?) WHERE KEY = (?)`
       )
       .run(key, value, key);
+
+    if (this.settings.inMemory) super.set(key, value);
   }
 
   /**

@@ -37,12 +37,23 @@ const db = new Datarex({
     settings: {
         inMemory: true, //defaults to true
         clearCache: false, //defaults to true
+        loadKeys: true   //defaults to true
     },
 });
 
 // Note path, tableName, and Intervals and settings are all optional, Defaults are already set
 module.exports.db = db;
 ```
+
+`path` is the absolute path to the sqlite file.
+`tableName` Name of the table you want to access.
+`Intervals` is an object with two properties, `expiryInterval` and `clearCacheInterval`.
+`expiryInterval` is the interval in milliseconds to check for expiry.
+`clearCacheInterval` is the interval in milliseconds to clear the cache.
+`settings` is an object with two properties, `inMemory`, `clearCache` and `loadKeys`.
+`inMemory` is a boolean that determines if the database must be cached.
+`clearCache` is a boolean that determines if the cache is cleared at intervals.
+`loadKeys` is a boolean that determines if the keys are loaded at the start of the process.
 
 +++ index.js
 

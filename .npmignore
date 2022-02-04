@@ -8,3 +8,4 @@ favicon.png
 logo.png
 .env
 test.js
+node_modules/

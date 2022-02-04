@@ -1,7 +1,7 @@
 {
 	"name": "datarex",
 	"description": "Easy to use better-sqlite3 wrapper with tons of features",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"author": {
 		"name": "Nigelrex"
 	},
@@ -25,5 +25,15 @@
 	"repository": "https://github.com/Nigelrex/datarex",
 	"bugs": "https://github.com/Nigelrex/datarex/issues",
 	"lisense": "Nigelrex Custom's lisense",
-	"keywords": ["Database", "Map", "db", "sqlite", "better-sqlite3", "Datarex"]
+	"keywords": [
+		"Database",
+		"Map",
+		"db",
+		"sqlite",
+		"better-sqlite3",
+		"Datarex",
+		"json",
+		"sql",
+		"Dx"
+	]
 }
