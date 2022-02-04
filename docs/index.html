@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/Datarex/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/Datarex/favicon.png" rel="icon" />
-    <link href="/Datarex/resources/css/retype.css?v=1.11.2.697205818344" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/Datarex/resources/css/retype.css?v=1.11.2.697306992590" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/Datarex/resources/js/config.js?v=1.11.2.697205818344" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/Datarex/resources/js/config.js?v=1.11.2.697306992590" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/Datarex/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/Datarex/resources/js/lunr.js?v=1.11.2.697205818344" defer></script>
-    <script id="prism-js" type="text/javascript" src="/Datarex/resources/js/prism.js?v=1.11.2.697205818344" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/Datarex/resources/js/lunr.js?v=1.11.2.697306992590" defer></script>
+    <script id="prism-js" type="text/javascript" src="/Datarex/resources/js/prism.js?v=1.11.2.697306992590" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -236,12 +236,22 @@ const db = new Datarex({
     settings: {
         inMemory: true, //defaults to true
         clearCache: false, //defaults to true
+        loadKeys: true   //defaults to true
     },
 });
 
 // Note path, tableName, and Intervals and settings are all optional, Defaults are already set
 module.exports.db = db;</code></pre>
 </doc-codeblock></div>
+<p><code v-pre>path</code> is the absolute path to the sqlite file.
+<code v-pre>tableName</code> Name of the table you want to access.
+<code v-pre>Intervals</code> is an object with two properties, <code v-pre>expiryInterval</code> and <code v-pre>clearCacheInterval</code>.
+<code v-pre>expiryInterval</code> is the interval in milliseconds to check for expiry.
+<code v-pre>clearCacheInterval</code> is the interval in milliseconds to clear the cache.
+<code v-pre>settings</code> is an object with two properties, <code v-pre>inMemory</code>, <code v-pre>clearCache</code> and <code v-pre>loadKeys</code>.
+<code v-pre>inMemory</code> is a boolean that determines if the database must be cached.
+<code v-pre>clearCache</code> is a boolean that determines if the cache is cleared at intervals.
+<code v-pre>loadKeys</code> is a boolean that determines if the keys are loaded at the start of the process.</p>
 </doc-tab>
 <doc-tab id="index-js">
 <template #title>index.js</template>
@@ -536,11 +546,11 @@ db.subtract(&quot;key&quot;, 20); // subtracts 20 from key and stores it as 13</
             
 <nav class="flex mt-14">
     <div class="w-1/2">
-        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/Datarex/">
+        <a class="px-5 py-4 h-full flex items-center break-all md:break-normal font-medium text-blue-500 dark:text-blue-400 border border-gray-300 hover:border-gray-400 dark:border-dark-650 dark:hover:border-dark-450 rounded-r rounded-l-lg transition-colors duration-150 relative hover:z-5" href="/Datarex/changelog/">
             <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
             <span>
                 <span class="block text-xs font-normal text-gray-400 dark:text-dark-400">Previous</span>
-                <span class="block mt-1">Daterex</span>
+                <span class="block mt-1">Datarex Changelogs</span>
             </span>
         </a>
     </div>
