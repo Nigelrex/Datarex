@@ -112,3 +112,5 @@ databases/
 *.vscode/
 pages/
 test.js
+*.tgz
+Databases/

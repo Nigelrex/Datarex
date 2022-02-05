@@ -4,7 +4,9 @@ databases/
 *.sqlite
 *.db
 retype.yml
-*.png
 .env
 test.js
 node_modules/
+Databases/
+*.github/
+*.tgz

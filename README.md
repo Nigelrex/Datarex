@@ -1,6 +1,8 @@
 # Daterex
 
-![](./LOGO-1.png)
+![](https://img.shields.io/github/languages/top/Nigelrex/Datarex?color=%2300D993&label=javascript&logo=javascript&logoColor=%23ggggg&style=for-the-badge) ![](https://img.shields.io/npm/dw/datarex?logo=NPM&style=for-the-badge) ![](https://img.shields.io/snyk/vulnerabilities/npm/datarex?logo=NPM&logoColor=%23ffffff&style=for-the-badge) [![](https://img.shields.io/discord/877422878826594334?logo=discord&style=for-the-badge)](https://discord.gg/ATrvrZtSqZ)
+
+![](./logo.png)
 
 ## What is Datarex?
 

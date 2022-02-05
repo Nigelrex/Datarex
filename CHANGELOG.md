@@ -29,3 +29,35 @@ Fourth release of Datarex
 -> Added a changelog to the project.
 
 -> Updated the docs.
+
+## 1.0.4
+
+-> Changed the ICON of the package.
+
+## 1.0.5
+
+-> Fixed the `get` bug again
+
+## 1.0.6
+
+-> Issue  still persisted, hopefully should be fixed now.
+
+## 1.0.7
+
+-> Mistaken publish.
+
+## 1.0.8
+
+-> Mistaken publish.
+
+## 1.0.9
+
+-> Mistaken publish.
+
+## 1.0.10
+
+-> Fixed a bug where none of the math functions work.
+
+-> Fixed a bug where the `get` function would not work with `inMemory` Enabled.
+
+-> Changed the logo.

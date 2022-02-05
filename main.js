@@ -69,9 +69,10 @@ module.exports = class Datarex extends Map {
   add(key, value) {
     if (typeof key === "number") key = key.toString();
     const get = this.get(key);
+    if (get === undefined) return;
     if (typeof get !== "number") throw Error(`${key} is not a number`);
-    if (typeof value !== "number") throw Error(`${value} is not a number`);
-    this.set(key, get + value);
+    if (typeof value !== "number") parseInt(value);
+    this.set(key, _.add(get, value));
   }
 
   /**
@@ -160,9 +161,11 @@ module.exports = class Datarex extends Map {
   divide(key, value) {
     if (typeof key === "number") key = key.toString();
     const get = this.get(key);
+
+    if (get === undefined) return;
     if (typeof get !== "number") throw Error(`${key} is not a number`);
     if (typeof value !== "number") throw Error(`${value} is not a number`);
-    this.set(key, get / value);
+    this.set(key, _.divide(get, value));
   }
 
   /**
@@ -170,25 +173,39 @@ module.exports = class Datarex extends Map {
    * @returns {any}
    */
   get(key) {
+    const okey = key;
     this._ctine();
     if (typeof key === "number") key = key.toString();
-    if (this.settings.inMemory) return JSON.parse(super.get(key));
     let target;
     let output;
+    let unparsed;
     if (key && key.includes(".")) {
-      let unparsed = key.split(".");
+      unparsed = key.split(".");
       key = unparsed.shift();
       target = unparsed.join(".");
     }
-    let fetched = JSON.parse(
-      this.db
-        .prepare(`SELECT * FROM ${this.tableName} WHERE KEY = (?)`)
-        .get(key).VALUE
-    );
-
+    let fetched = this.db
+      .prepare(`SELECT * FROM ${this.tableName} WHERE KEY = (?)`)
+      .get(key);
+    if (!fetched) return undefined;
+    fetched = JSON.parse(fetched?.VALUE);
     if (typeof fetched === "object" && target) output = _.get(fetched, target);
     else output = fetched;
-    return output ?? undefined;
+    if (this.settings.inMemory) {
+      try {
+        let val = JSON.parse(super.get(key));
+        if (typeof val === "object" && target !== undefined)
+          val = _.get(val, target);
+        return val;
+      } catch (error) {
+        return undefined;
+      }
+    }
+    try {
+      return output;
+    } catch (error) {
+      return undefined;
+    }
   }
 
   /**
@@ -212,9 +229,11 @@ module.exports = class Datarex extends Map {
   multiply(key, value) {
     if (typeof key === "number") key = key.toString();
     const get = this.get(key);
+
+    if (get === undefined) return;
     if (typeof get !== "number") throw Error(`${key} is not a number`);
     if (typeof value !== "number") throw Error(`${value} is not a number`);
-    this.set(key, get * value);
+    this.set(key, _.multiply(get, value));
   }
 
   /**
@@ -303,6 +322,7 @@ module.exports = class Datarex extends Map {
    * @param {String} timeString
    */
   setExpiry(key, timeString) {
+    this._ctine();
     let target;
     if (key && key.includes(".")) {
       let unparsed = key.split(".");
@@ -311,6 +331,7 @@ module.exports = class Datarex extends Map {
     }
     const Nkey = key;
     key = this.get(key);
+    if (!key) throw Error(`${key} does not exists`);
     const time = this._parseTime(timeString);
     key.expiry = time / 1000 + moment().unix();
     key.now = moment().unix();
@@ -322,6 +343,7 @@ module.exports = class Datarex extends Map {
    *
    */
   setMany(array) {
+    this._ctine();
     if (!_.isArray(array)) throw Error(`${array} is not an array`);
     array.forEach((element, index) => {
       try {
@@ -335,11 +357,14 @@ module.exports = class Datarex extends Map {
    * @param {Number} value
    */
   subtract(key, value) {
+    this._ctine();
     if (typeof key === "number") key = key.toString();
     const get = this.get(key);
+
+    if (get === undefined) return;
     if (typeof get !== "number") throw Error(`${key} is not a number`);
     if (typeof value !== "number") throw Error(`${value} is not a number`);
-    this.set(key, get - value);
+    this.set(key, _.subtract(get, value));
   }
 
   /**
