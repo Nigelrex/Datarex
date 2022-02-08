@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/Datarex/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/Datarex/favicon.png" rel="icon" />
-    <link href="/Datarex/resources/css/retype.css?v=1.11.2.697360779321" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/Datarex/resources/css/retype.css?v=1.11.2.697657819259" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/Datarex/resources/js/config.js?v=1.11.2.697360779321" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/Datarex/resources/js/config.js?v=1.11.2.697657819259" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/Datarex/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/Datarex/resources/js/lunr.js?v=1.11.2.697360779321" defer></script>
-    <script id="prism-js" type="text/javascript" src="/Datarex/resources/js/prism.js?v=1.11.2.697360779321" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/Datarex/resources/js/lunr.js?v=1.11.2.697657819259" defer></script>
+    <script id="prism-js" type="text/javascript" src="/Datarex/resources/js/prism.js?v=1.11.2.697657819259" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -209,6 +209,7 @@
 <li><doc-anchor-trigger to="#multiply">Multiply</doc-anchor-trigger></li>
 <li><doc-anchor-trigger to="#push">Push</doc-anchor-trigger></li>
 <li><doc-anchor-trigger to="#removearrval">removeArrVal</doc-anchor-trigger></li>
+<li><doc-anchor-trigger to="#removeexpiry">removeExpiry</doc-anchor-trigger></li>
 <li><doc-anchor-trigger to="#removeobjval">removeObjVal</doc-anchor-trigger></li>
 <li><doc-anchor-trigger to="#set">Set</doc-anchor-trigger></li>
 <li><doc-anchor-trigger to="#setexpiry">setExpiry</doc-anchor-trigger></li>
@@ -227,17 +228,24 @@
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <pre class="language-javascript"><code v-pre class="language-javascript">const Datarex = require(&quot;datarex&quot;);
 const db = new Datarex({
-    path: &quot;./Databases/my DB/index.sqlite&quot;,  //defalts to &quot;./Databases/index.sqlite&quot;
-    tableName: &quot;New Table&quot;,  // Optional
-    Intervals: {
-        expiryInterval: 40000, // defaults to 1000
-        clearCacheInterval: 200000 // defaults to 300000
-    },
-    settings: {
-        inMemory: true, //defaults to true
-        clearCache: false, //defaults to true
-        loadKeys: true   //defaults to true
-    },
+ path: &quot;./Databases/index.sqlite&quot;,
+ tableName: &quot;json&quot;,
+ server: {
+  listen: &quot;client&quot;, //default client
+  type: &quot;client&quot; | &quot;server&quot;, //default client
+  host: &quot;127.0.0.1:433&quot;, //default 127.0.0.1
+  port: 433, // default 433
+  password: &quot;Datarex&quot;, // default Datarex
+ },
+ Intervals: {
+  expiryInterval: 1000, // defaults to 1000
+  clearCacheInterval: 300000, // defaults to 300000
+ },
+ settings: {
+  inMemory: true, //defaults to true
+  clearCache: true, //defaults to true
+  loadKeys: true, //defaults to true
+ },
 });
 
 // Note path, tableName, and Intervals and settings are all optional, Defaults are already set
@@ -251,7 +259,13 @@ module.exports.db = db;</code></pre>
 <code v-pre>settings</code> is an object with two properties, <code v-pre>inMemory</code>, <code v-pre>clearCache</code> and <code v-pre>loadKeys</code>.
 <code v-pre>inMemory</code> is a boolean that determines if the database must be cached.
 <code v-pre>clearCache</code> is a boolean that determines if the cache is cleared at intervals.
-<code v-pre>loadKeys</code> is a boolean that determines if the keys are loaded at the start of the process.</p>
+<code v-pre>loadKeys</code> is a boolean that determines if the keys are loaded at the start of the process.
+<code v-pre>server</code> is a Object with 4 properties, <code v-pre>port</code>, <code v-pre>host</code>, <code v-pre>listen</code> and <code v-pre>password</code>.
+<code v-pre>port</code> is the port to listen on (Default <code v-pre>433</code>).
+<code v-pre>host</code> is the host to listen on (Default <code v-pre>127.0.0.1</code>).
+<code v-pre>listen</code> is a 2 option server|client (Default <code v-pre>client</code>).
+<code v-pre>type</code> is a 2 option client|server (Default <code v-pre>client</code>).
+<code v-pre>password</code> is the password to use for the server (Default <code v-pre>Datarex</code>).</p>
 </doc-tab>
 <doc-tab id="index-js">
 <template #title>index.js</template>
@@ -268,7 +282,7 @@ module.exports.db = db;</code></pre>
     </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
-<pre class="language-javascript"><code v-pre class="language-javascript">db.db // this directly allows you to interact with the database with better-sqlite3 SQL </code></pre>
+<pre class="language-javascript"><code v-pre class="language-javascript">db.db; // this directly allows you to interact with the database with better-sqlite3 SQL</code></pre>
 </doc-codeblock></div>
 <div class="flex mb-6">
     <div class="flex-shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
@@ -284,6 +298,23 @@ module.exports.db = db;</code></pre>
         </div>
         <div class="pr-5 ml-3">
 <p>For all methods that modify the value, the value must be set to the specified key</p>
+        </div>
+    </div>
+</div>
+<div class="flex mb-6">
+    <div class="flex-shrink-0 w-1 rounded-tl rounded-bl bg-blue-500 dark:bg-blue-400"></div>
+    <div class="flex w-full py-4 border border-l-0 border-gray-300 rounded-tr rounded-br doc-alert bg-white dark:bg-dark-700 dark:border-dark-700" role="alert">
+        <div class="flex items-center ml-4 h-7">
+            <svg xmlns="http://www.w3.org/2000/svg" class="mb-px text-blue-500 dark:text-blue-400" width="22" height="22" viewBox="0 0 24 24" role="presentation">
+                <g fill="currentColor"><g>
+                    <path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.96 0-9-4.04-9-9s4.04-9 9-9 9 4.04 9 9-4.04 9-9 9z"></path>
+                    <path d="M12 11c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1s1-.45 1-1v-4c0-.55-.45-1-1-1zM12.01 7c-.56 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"></path>
+                    <path fill="none" d="M0 0h24v24H0z"></path>
+                </g></g>
+            </svg>
+        </div>
+        <div class="pr-5 ml-3">
+<p>If you listen to client, you must use await</p>
         </div>
     </div>
 </div>
@@ -325,8 +356,8 @@ db.add(&quot;key&quot;, 20); // adds 46 + 20 and stores it as 66</code></pre>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <pre class="language-javascript"><code v-pre class="language-javascript">const data = db.all();
 console.log(data); // [{key: &quot;key&quot;, value: 66}]
-data.forEach(element =&gt; {
-    console.log(element); // logs {KEY: &quot;key&quot;, VALUE: 66}
+data.forEach((element) =&gt; {
+ console.log(element); // logs {KEY: &quot;key&quot;, VALUE: 66}
 });</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="backup">
@@ -337,7 +368,10 @@ data.forEach(element =&gt; {
 </doc-anchor-target>
 <p>Backup your database incase of a corruption.</p>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
-<pre class="language-javascript"><code v-pre class="language-javascript">db.backup({ name: &quot;MY DATABASE&quot;, path: &quot;./backup-index.sqlite&quot; });</code></pre>
+<pre class="language-javascript"><code v-pre class="language-javascript">db.backup({
+ name: &quot;MY DATABASE&quot;,
+ path: &quot;./Backup Database&quot;,
+});</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="clearcache">
     <h3>
@@ -485,6 +519,15 @@ db.multiply(&quot;key&quot;, 2); // multiplies key by 2 and stores it as 66</cod
 <pre class="language-javascript"><code v-pre class="language-javascript">db.get(&quot;key&quot;); // returns [1, 2, 3]
 db.removeArrVal(&quot;key&quot;, (value) =&gt; value === 1); // removes 1 from key</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="removeexpiry">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#removeexpiry">#</doc-anchor-trigger>
+        <span>removeExpiry</span>
+    </h2>
+</doc-anchor-target>
+<div class="codeblock-wrapper"><doc-codeblock line-numbers>
+<pre class="language-javascript"><code v-pre class="language-javascript">db.removeExpiry(&quot;key&quot;); // removes expiry on this key</code></pre>
+</doc-codeblock></div>
 <doc-anchor-target id="removeobjval">
     <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#removeobjval">#</doc-anchor-trigger>
@@ -521,8 +564,8 @@ db.removeObjVal(&quot;key.a&quot;); // removes &quot;a&quot; from key and stores
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <pre class="language-javascript"><code v-pre class="language-javascript">db.setMany([
-    {KEY: 33, VALUE: &quot;value&quot;},
-    {KEY: &quot;key&quot;, VALUE: &quot;value&quot;}
+ { KEY: 33, VALUE: &quot;value&quot; },
+ { KEY: &quot;key&quot;, VALUE: &quot;value&quot; },
 ]);</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="subtract">
