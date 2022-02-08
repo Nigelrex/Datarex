@@ -73,3 +73,5 @@ Fourth release of Datarex
 -> Tweaked the expiry keys.
 
 -> Added removeExpiry function.
+
+-> Added Typings.
