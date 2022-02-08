@@ -15,6 +15,7 @@
 - [Multiply](#multiply)
 - [Push](#push)
 - [removeArrVal](#removearrval)
+- [removeExpiry](#removeexpiry)
 - [removeObjVal](#removeobjval)
 - [Set](#set)
 - [setExpiry](#setexpiry)
@@ -28,17 +29,24 @@
 ```js
 const Datarex = require("datarex");
 const db = new Datarex({
-    path: "./Databases/my DB/index.sqlite",  //defalts to "./Databases/index.sqlite"
-    tableName: "New Table",  // Optional
-    Intervals: {
-        expiryInterval: 40000, // defaults to 1000
-        clearCacheInterval: 200000 // defaults to 300000
-    },
-    settings: {
-        inMemory: true, //defaults to true
-        clearCache: false, //defaults to true
-        loadKeys: true   //defaults to true
-    },
+ path: "./Databases/index.sqlite",
+ tableName: "json",
+ server: {
+  listen: "client", //default client
+  type: "client" | "server", //default client
+  host: "127.0.0.1:433", //default 127.0.0.1
+  port: 433, // default 433
+  password: "Datarex", // default Datarex
+ },
+ Intervals: {
+  expiryInterval: 1000, // defaults to 1000
+  clearCacheInterval: 300000, // defaults to 300000
+ },
+ settings: {
+  inMemory: true, //defaults to true
+  clearCache: true, //defaults to true
+  loadKeys: true, //defaults to true
+ },
 });
 
 // Note path, tableName, and Intervals and settings are all optional, Defaults are already set
@@ -54,6 +62,12 @@ module.exports.db = db;
 `inMemory` is a boolean that determines if the database must be cached.
 `clearCache` is a boolean that determines if the cache is cleared at intervals.
 `loadKeys` is a boolean that determines if the keys are loaded at the start of the process.
+`server` is a Object with 4 properties, `port`, `host`, `listen` and `password`.
+`port` is the port to listen on (Default `433`).
+`host` is the host to listen on (Default `127.0.0.1`).
+`listen` is a 2 option server|client (Default `client`).
+`type` is a 2 option client|server (Default `client`).
+`password` is the password to use for the server (Default `Datarex`).
 
 +++ index.js
 
@@ -67,11 +81,15 @@ const { db } = require("./databaseSchema");
 ### Functions
 
 ```js
-db.db // this directly allows you to interact with the database with better-sqlite3 SQL 
+db.db; // this directly allows you to interact with the database with better-sqlite3 SQL
 ```
 
 !!!
 For all methods that modify the value, the value must be set to the specified key
+!!!
+
+!!!
+If you listen to client, you must use await
 !!!
 
 ### Add
@@ -93,8 +111,8 @@ It returns all the stored data in the table as a array.
 ```js
 const data = db.all();
 console.log(data); // [{key: "key", value: 66}]
-data.forEach(element => {
-    console.log(element); // logs {KEY: "key", VALUE: 66}
+data.forEach((element) => {
+ console.log(element); // logs {KEY: "key", VALUE: 66}
 });
 ```
 
@@ -103,7 +121,10 @@ data.forEach(element => {
 Backup your database incase of a corruption.
 
 ```js
-db.backup({ name: "MY DATABASE", path: "./backup-index.sqlite" });
+db.backup({
+ name: "MY DATABASE",
+ path: "./Backup Database",
+});
 ```
 
 ### clearCache
@@ -188,6 +209,12 @@ db.get("key"); // returns [1, 2, 3]
 db.removeArrVal("key", (value) => value === 1); // removes 1 from key
 ```
 
+## removeExpiry
+
+```js
+db.removeExpiry("key"); // removes expiry on this key
+```
+
 ### removeObjVal
 
 ```js
@@ -211,8 +238,8 @@ db.setExpiry("key", "5m"); // sets key to expire in 5 minutes [1s 2m 3h 4d 5mo 6
 
 ```js
 db.setMany([
-    {KEY: 33, VALUE: "value"},
-    {KEY: "key", VALUE: "value"}
+ { KEY: 33, VALUE: "value" },
+ { KEY: "key", VALUE: "value" },
 ]);
 ```
 

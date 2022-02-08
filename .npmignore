@@ -6,7 +6,9 @@ databases/
 retype.yml
 .env
 test.js
+test1.js
 node_modules/
 Databases/
 *.github/
 *.tgz
+*.png

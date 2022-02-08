@@ -61,3 +61,15 @@ Fourth release of Datarex
 -> Fixed a bug where the `get` function would not work with `inMemory` Enabled.
 
 -> Changed the logo.
+
+## 1.0.11
+
+-> Fixed a error where if the database is brandnew and the table is not created, it will error out.
+
+## 1.1.0
+
+-> Massive change, added two server connections.
+
+-> Tweaked the expiry keys.
+
+-> Added removeExpiry function.
