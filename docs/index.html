@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/Datarex/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/Datarex/favicon.png" rel="icon" />
-    <link href="/Datarex/resources/css/retype.css?v=1.11.2.697657861681" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/Datarex/resources/css/retype.css?v=1.11.2.697719518705" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/Datarex/resources/js/config.js?v=1.11.2.697657861681" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/Datarex/resources/js/config.js?v=1.11.2.697719518705" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/Datarex/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/Datarex/resources/js/lunr.js?v=1.11.2.697657861681" defer></script>
-    <script id="prism-js" type="text/javascript" src="/Datarex/resources/js/prism.js?v=1.11.2.697657861681" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/Datarex/resources/js/lunr.js?v=1.11.2.697719518705" defer></script>
+    <script id="prism-js" type="text/javascript" src="/Datarex/resources/js/prism.js?v=1.11.2.697719518705" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -63,7 +63,19 @@
             <nav class="hidden md:flex">
     <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
         <li class="md:mr-6">
-            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="/Datarex/">Getting Started</a>
+            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="/Datarex/docs/">Getting Started</a>
+        </li>
+        <li class="md:mr-6">
+            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="https://github.com/Nigelrex/Datarex">Github</a>
+        </li>
+        <li class="md:mr-6">
+            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="https://www.npmjs.com/package/datarex">NPM</a>
+        </li>
+        <li class="md:mr-6">
+            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="https://github.com/Nigelrex/Datarex/issues">Issues</a>
+        </li>
+        <li class="md:mr-6">
+            <a class="block py-2 text-sm text-gray-400 whitespace-nowrap transition-colors duration-200 ease-linear md:text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 md:mb-0" href="/Datarex/changelog/">Changelog</a>
         </li>
     </ul>
 </nav>
@@ -151,7 +163,19 @@
                 <nav>
                     <ul class="flex flex-wrap justify-center items-center">
                         <li class="mr-6">
-                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="README.md">Getting Started</a>
+                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="docs.md">Getting Started</a>
+                        </li>
+                        <li class="mr-6">
+                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://github.com/Nigelrex/Datarex">Github</a>
+                        </li>
+                        <li class="mr-6">
+                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://www.npmjs.com/package/datarex">NPM</a>
+                        </li>
+                        <li class="mr-6">
+                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="https://github.com/Nigelrex/Datarex/issues">Issues</a>
+                        </li>
+                        <li class="mr-6">
+                            <a class="block py-1 text-sm whitespace-nowrap transition-colors duration-200 ease-linear text-blue-500 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200" href="CHANGELOG.md">Changelog</a>
                         </li>
                     </ul>
                 </nav>
@@ -520,10 +544,10 @@ db.multiply(&quot;key&quot;, 2); // multiplies key by 2 and stores it as 66</cod
 db.removeArrVal(&quot;key&quot;, (value) =&gt; value === 1); // removes 1 from key</code></pre>
 </doc-codeblock></div>
 <doc-anchor-target id="removeexpiry">
-    <h2>
+    <h3>
         <doc-anchor-trigger class="header-anchor-trigger" to="#removeexpiry">#</doc-anchor-trigger>
         <span>removeExpiry</span>
-    </h2>
+    </h3>
 </doc-anchor-target>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
 <pre class="language-javascript"><code v-pre class="language-javascript">db.removeExpiry(&quot;key&quot;); // removes expiry on this key</code></pre>
