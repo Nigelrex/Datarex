@@ -2,11 +2,7 @@ const fs = require("fs-extra");
 const Database = require("better-sqlite3");
 const _ = require("lodash");
 const moment = require("moment");
-const express = require("express");
 const fastify = require("fastify")();
-const fetch = (...args) =>
-  import("node-fetch").then(({ default: fetch }) => fetch(...args));
-const app = express();
 
 module.exports = class Datarex extends Map {
   /**

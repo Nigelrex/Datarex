@@ -209,7 +209,7 @@ db.get("key"); // returns [1, 2, 3]
 db.removeArrVal("key", (value) => value === 1); // removes 1 from key
 ```
 
-## removeExpiry
+### removeExpiry
 
 ```js
 db.removeExpiry("key"); // removes expiry on this key
