@@ -75,3 +75,7 @@ Fourth release of Datarex
 -> Added removeExpiry function.
 
 -> Added Typings.
+
+## 1.1.1
+
+-> Removed bloat packages that makes Datarex run slower.
