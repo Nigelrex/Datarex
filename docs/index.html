@@ -26,12 +26,12 @@
     <script>(function () { var el = document.documentElement, m = localStorage.getItem("/Datarex/doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
     <link href="/Datarex/favicon.png" rel="icon" />
-    <link href="/Datarex/resources/css/retype.css?v=1.11.2.699622666497" rel="stylesheet" data-turbo-track="reload" />
+    <link href="/Datarex/resources/css/retype.css?v=1.11.2.701854513210" rel="stylesheet" data-turbo-track="reload" />
 
-    <script type="text/javascript" src="/Datarex/resources/js/config.js?v=1.11.2.699622666497" defer data-turbo-track="reload"></script>
+    <script type="text/javascript" src="/Datarex/resources/js/config.js?v=1.11.2.701854513210" defer data-turbo-track="reload"></script>
     <script type="text/javascript" src="/Datarex/resources/js/retype.js?v=1.11.2" defer data-turbo-track="reload"></script>
-    <script id="lunr-js" type="text/javascript" src="/Datarex/resources/js/lunr.js?v=1.11.2.699622666497" defer></script>
-    <script id="prism-js" type="text/javascript" src="/Datarex/resources/js/prism.js?v=1.11.2.699622666497" defer></script>
+    <script id="lunr-js" type="text/javascript" src="/Datarex/resources/js/lunr.js?v=1.11.2.701854513210" defer></script>
+    <script id="prism-js" type="text/javascript" src="/Datarex/resources/js/prism.js?v=1.11.2.701854513210" defer></script>
 </head>
     <body>
         <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -250,7 +250,7 @@
 <doc-tab id="databaseschema-js">
 <template #title>databaseSchema.js</template>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
-<pre class="language-javascript"><code v-pre class="language-javascript">const Datarex = require(&quot;datarex&quot;);
+<pre class="language-javascript"><code v-pre class="language-javascript">import Datarex from &quot;datarex&quot;;
 const db = new Datarex({
  path: &quot;./Databases/index.sqlite&quot;,
  tableName: &quot;json&quot;,
@@ -294,7 +294,7 @@ module.exports.db = db;</code></pre>
 <doc-tab id="index-js">
 <template #title>index.js</template>
 <div class="codeblock-wrapper"><doc-codeblock line-numbers>
-<pre class="language-javascript"><code v-pre class="language-javascript">const { db } = require(&quot;./databaseSchema&quot;);
+<pre class="language-javascript"><code v-pre class="language-javascript">import { db }  from &quot;./databaseSchema&quot;;
 // Rest of the stuff</code></pre>
 </doc-codeblock></div>
 </doc-tab>
