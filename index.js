@@ -1,10 +1,10 @@
-const fs = require("fs-extra");
-const Database = require("better-sqlite3");
-const _ = require("lodash");
-const moment = require("moment");
-const fastify = require("fastify")();
+import fs from "fs-extra";
+import Database from "better-sqlite3";
+import _ from "lodash";
+import moment from "moment";
+import fastify from "fastify";
 
-module.exports = class Datarex extends Map {
+export default class Datarex extends Map {
   /**
    * @param {String} options.path path to database
    * @param {String} options.tableName Your tablename
@@ -353,8 +353,9 @@ module.exports = class Datarex extends Map {
     this._ctine();
     if (typeof key === "number") key = key.toString();
     const get = this.get(key);
-    if (typeof get !== "object") throw Error(`${key} is not an array`);
-    this.set(key, get.push(value));
+    if (!Array.isArray(get)) throw Error(`${key} is not an array`);
+    get.push(value);
+    this.set(key, get);
   }
   /**
    * @param {String} key
@@ -613,4 +614,4 @@ module.exports = class Datarex extends Map {
       parseInt(years);
     return output;
   }
-};
+}

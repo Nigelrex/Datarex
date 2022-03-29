@@ -27,7 +27,7 @@
 +++ databaseSchema.js
 
 ```js
-const Datarex = require("datarex");
+import Datarex from "datarex";
 const db = new Datarex({
  path: "./Databases/index.sqlite",
  tableName: "json",
@@ -72,7 +72,7 @@ module.exports.db = db;
 +++ index.js
 
 ```js
-const { db } = require("./databaseSchema");
+import { db }  from "./databaseSchema";
 // Rest of the stuff
 ```
 

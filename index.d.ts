@@ -1,9 +1,4 @@
-/// <reference types="typescript" />
-
-// import Datarex from "./main.js";
-
-export = Datarex;
-declare class Datarex {
+export default class Datarex {
 	public constructor(
 		options?: DatarexOptions.ConstructorOptions,
 	): DatarexOptions;
@@ -111,7 +106,7 @@ declare namespace DatarexOptions {
 			type?: "client" | "server"; //default client
 			host?: "127.0.0.1"; //default 127.0.0.1
 			port?: 433; //default 433
-			password: String;
+			password?: String;
 		};
 		Intervals?: {
 			expiryInterval?: Number; // defaults to 1000

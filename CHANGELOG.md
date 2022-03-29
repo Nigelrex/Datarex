@@ -79,3 +79,15 @@ Fourth release of Datarex
 ## 1.1.1
 
 -> Removed bloat packages that makes Datarex run slower.
+
+## 1.1.2
+
+-> Changed the package to module. You will only be able to use this package by importing like
+
+```js
+import Datarex from "datarex"
+// OR
+const Datarex = await import("datarex")
+```
+
+-> Fixed a bug where pushing strings or objects or arrays inside the set array sets the index value of the array instead of the array with the pushed items.
